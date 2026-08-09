@@ -309,15 +309,15 @@
 </div>
 
 <header class="masthead">
-  <p class="eyebrow">Developed &amp; Printed — BASI Images Archive</p>
+  <p class="eyebrow">BASI Images Archive</p>
   <h1>BASI <span>— Contact Sheet</span></h1>
-  <div class="stamp-row">
+  <!-- <div class="stamp-row">
     <span><strong>Stock</strong> Portra 400</span>
     <span><strong>Format</strong> 35mm</span>
     <span><strong>Exposed</strong> Aug 2026</span>
     <span><strong>Frames</strong> 12</span>
     <span><strong>Processed</strong> C-41, home lab</span>
-  </div>
+  </div> -->
 </header>
 
 <main class="sheet">
@@ -351,35 +351,53 @@
 </div>
 
 <script>
-  const frames = [
-    { id: 1084, num: "01A", title: "Coastal switchback, first light", specs: "f/8 · 1/250 · overcast" },
-    { id: 1076, num: "02",  title: "Ridge line, late afternoon", specs: "f/11 · 1/125 · clear" },
-    { id: 431,  num: "03",  title: "Terminal, platform 3", specs: "f/2.8 · 1/60 · tungsten" },
-    { id: 1015, num: "04",  title: "Harbor wall, low tide", specs: "f/16 · 1/60 · bright sun" },
-    { id: 1039, num: "05",  title: "Switchback trail, pines", specs: "f/8 · 1/250 · hazy" },
-    { id: 160,  num: "06",  title: "Corner store, closing time", specs: "f/2 · 1/30 · sodium light" },
-    { id: 110,  num: "07",  title: "Stairwell, old quarter", specs: "f/5.6 · 1/125 · window light" },
-    { id: 219,  num: "08",  title: "Market stalls, midday", specs: "f/11 · 1/500 · overhead sun" },
-    { id: 129,  num: "09",  title: "River bend, dusk", specs: "f/4 · 1/60 · blue hour" },
-    { id: 1043, num: "10",  title: "Fence line, wide field", specs: "f/8 · 1/250 · flat light" },
-    { id: 306,  num: "11",  title: "Doorway, side street", specs: "f/2.8 · 1/60 · shade" },
-    { id: 1050, num: "12A", title: "Overlook, roll's end", specs: "f/11 · 1/125 · golden hour" }
+  const images = [
+    {id: 1, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786300958/Astrophotography/vyz8q0rp73g2fyalldqj.jpg', name: 'Rosetta nebula'},
+    {id: 2, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786300958/Astrophotography/xyiyateqloxey6aef3n3.jpg', name: 'Lagoon nebula'},
+    {id: 3, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302109/Astrophotography/supernova-in-m101-1024x683.jpg', name: 'Supernova in M101'},
+    {id: 4, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302097/Astrophotography/jupiter-600-stacked-1024x576.jpg', name: 'Jupiter and Gallilean moons'},
+    {id: 5, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302065/Astrophotography/harrybayley_bw.jpg', name: 'Harry Bayley Observatory'},
   ];
+
+  // const frames = [
+  //   { id: 1084, num: "01A", title: "Coastal switchback, first light", specs: "f/8 · 1/250 · overcast" },
+  //   { id: 1076, num: "02",  title: "Ridge line, late afternoon", specs: "f/11 · 1/125 · clear" },
+  //   { id: 431,  num: "03",  title: "Terminal, platform 3", specs: "f/2.8 · 1/60 · tungsten" },
+  //   { id: 1015, num: "04",  title: "Harbor wall, low tide", specs: "f/16 · 1/60 · bright sun" },
+  //   { id: 1039, num: "05",  title: "Switchback trail, pines", specs: "f/8 · 1/250 · hazy" },
+  //   { id: 160,  num: "06",  title: "Corner store, closing time", specs: "f/2 · 1/30 · sodium light" },
+  //   { id: 110,  num: "07",  title: "Stairwell, old quarter", specs: "f/5.6 · 1/125 · window light" },
+  //   { id: 219,  num: "08",  title: "Market stalls, midday", specs: "f/11 · 1/500 · overhead sun" },
+  //   { id: 129,  num: "09",  title: "River bend, dusk", specs: "f/4 · 1/60 · blue hour" },
+  //   { id: 1043, num: "10",  title: "Fence line, wide field", specs: "f/8 · 1/250 · flat light" },
+  //   { id: 306,  num: "11",  title: "Doorway, side street", specs: "f/2.8 · 1/60 · shade" },
+  //   { id: 1050, num: "12A", title: "Overlook, roll's end", specs: "f/11 · 1/125 · golden hour" }
+  // ];
 
   const grid = document.getElementById("grid");
 
-  frames.forEach((f, i) => {
+  images.forEach((f, i) => {
     const btn = document.createElement("button");
     btn.className = "frame";
     btn.setAttribute("data-index", i);
+
     btn.innerHTML = `
-      <span class="frame-number">${f.num}</span>
-      <img src="https://picsum.photos/id/${f.id}/700/467" alt="${f.title}" loading="lazy">
+      <span class="frame-number">${f.id}</span>
+      <img src="${f.url}" alt="${f.name}" loading="lazy">
       <span class="frame-meta">
-        <p class="title">${f.title}</p>
-        <p class="specs">${f.specs}</p>
+        <p class="title">${f.name}</p>
       </span>
     `;
+
+    // btn.innerHTML = `
+    //   <span class="frame-number">${f.num}</span>
+    //   <img src="https://picsum.photos/id/${f.id}/700/467" alt="${f.title}" loading="lazy">
+    //   <span class="frame-meta">
+    //     <p class="title">${f.title}</p>
+    //     <p class="specs">${f.specs}</p>
+    //   </span>
+    // `;
+    
     btn.addEventListener("click", () => openLighttable(i));
     grid.appendChild(btn);
   });
@@ -396,10 +414,13 @@
 
   function openLighttable(i){
     current = i;
-    const f = frames[i];
-    ltImg.src = `https://picsum.photos/id/${f.id}/1400/933`;
-    ltImg.alt = f.title;
-    ltTitle.textContent = `Frame ${f.num} — ${f.title}`;
+    // const f = frames[i];
+    const f = images[i];
+    // ltImg.src = `https://picsum.photos/id/${f.id}/1400/933`;
+    ltImg.src = `${f.url}`;
+    // ltImg.alt = f.title;
+    ltImg.alt = f.name;
+    ltTitle.textContent = `Frame ${f.id} — ${f.name}`;
     ltSpecs.textContent = f.specs;
     lighttable.classList.add("open");
     lastFocused = document.activeElement;
