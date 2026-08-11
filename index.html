@@ -1,390 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BASI — Contact Sheet</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #16140f;
-    --bg-raised: #1e1b14;
-    --bone: #ece6d6;
-    --bone-dim: #b9b3a1;
-    --safelight: #a3311f;
-    --amber: #c98a3e;
-    --sage: #7a8264;
-    --sprocket: #0c0b08;
-    --border: #33301f;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASI — Contact Sheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #16140f;
+      --bg-raised: #1e1b14;
+      --bone: #ece6d6;
+      --bone-dim: #b9b3a1;
+      --safelight: #a3311f;
+      --amber: #c98a3e;
+      --sage: #7a8264;
+      --sprocket: #0c0b08;
+      --border: #33301f;
+    }
 
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
 
-  body{
-    margin:0;
-    background: var(--bg);
-    color: var(--bone);
-    font-family: 'Fraunces', Georgia, serif;
-    -webkit-font-smoothing: antialiased;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* faint grain texture */
-  body::before{
-    content:"";
-    position: fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:0.05;
-    z-index: 999;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--bone);
+      font-family: 'Fraunces', Georgia, serif;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  a{ color: inherit; }
+    /* faint grain texture */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.05;
+      z-index: 999;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
 
-  .masthead{
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 64px 32px 28px;
-  }
+    a {
+      color: inherit;
+    }
 
-  .eyebrow{
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--safelight);
-    margin: 0 0 14px;
-  }
+    .masthead {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 64px 32px 28px;
+    }
 
-  h1{
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: clamp(38px, 7vw, 76px);
-    letter-spacing: -0.01em;
-    line-height: 0.95;
-    text-transform: uppercase;
-    margin: 0 0 18px;
-    color: var(--bone);
-  }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--safelight);
+      margin: 0 0 14px;
+    }
 
-  h1 span{ color: var(--amber); }
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(38px, 7vw, 76px);
+      letter-spacing: -0.01em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+      color: var(--bone);
+    }
 
-  .stamp-row{
-    display:flex;
-    flex-wrap: wrap;
-    gap: 10px 28px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px;
-    color: var(--bone-dim);
-    border-top: 1px solid var(--border);
-    padding-top: 16px;
-    margin-top: 8px;
-  }
-  .stamp-row strong{ color: var(--sage); font-weight: 500; }
+    h1 span {
+      color: var(--amber);
+    }
 
-  /* sprocket strip */
-  .sprocket-strip{
-    height: 22px;
-    background: var(--sprocket);
-    display:flex;
-    align-items:center;
-    gap: 18px;
-    padding: 0 24px;
-    overflow: hidden;
-  }
-  .sprocket-strip span{
-    width: 11px;
-    height: 8px;
-    background: var(--bg);
-    border-radius: 2px;
-    flex: none;
-  }
+    .stamp-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 28px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px;
+      color: var(--bone-dim);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 8px;
+    }
 
-  .sheet{
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 40px 32px 100px;
-  }
+    .stamp-row strong {
+      color: var(--sage);
+      font-weight: 500;
+    }
 
-  .grid{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3px;
-    background: var(--sprocket);
-    border: 3px solid var(--sprocket);
-  }
+    /* sprocket strip */
+    .sprocket-strip {
+      height: 22px;
+      background: var(--sprocket);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 0 24px;
+      overflow: hidden;
+    }
 
-  @media (max-width: 900px){
-    .grid{ grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 520px){
-    .grid{ grid-template-columns: 1fr; }
-  }
+    .sprocket-strip span {
+      width: 11px;
+      height: 8px;
+      background: var(--bg);
+      border-radius: 2px;
+      flex: none;
+    }
 
-  .frame{
-    position: relative;
-    background: var(--bg-raised);
-    aspect-ratio: 3 / 2;
-    overflow: hidden;
-    cursor: pointer;
-    border: none;
-    padding: 0;
-    display:block;
-    width:100%;
-    text-align:left;
-  }
+    .sheet {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 32px 100px;
+    }
 
-  .frame img{
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    display:block;
-    filter: saturate(0.92) contrast(1.03);
-    transition: transform 0.6s cubic-bezier(.2,.7,.2,1), filter 0.4s ease;
-  }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      background: var(--sprocket);
+      border: 3px solid var(--sprocket);
+    }
 
-  .frame-number{
-    position:absolute;
-    top: 8px;
-    left: 10px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--amber);
-    background: rgba(12,11,8,0.65);
-    padding: 2px 6px;
-    z-index: 2;
-  }
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-  .frame-meta{
-    position:absolute;
-    inset: auto 0 0 0;
-    padding: 10px 12px 12px;
-    background: linear-gradient(to top, rgba(12,11,8,0.92), rgba(12,11,8,0));
-    transform: translateY(100%);
-    transition: transform 0.35s cubic-bezier(.2,.7,.2,1);
-    z-index: 2;
-  }
+    @media (max-width: 520px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-  .frame-meta .title{
-    font-family: 'Fraunces', serif;
-    font-size: 14.5px;
-    font-style: italic;
-    color: var(--bone);
-    margin: 0 0 3px;
-  }
-  .frame-meta .specs{
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10.5px;
-    color: var(--sage);
-    margin:0;
-  }
+    .frame {
+      position: relative;
+      background: var(--bg-raised);
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
 
-  .frame:hover img,
-  .frame:focus-visible img{
-    transform: scale(1.06);
-    filter: saturate(1) contrast(1.05);
-  }
-  .frame:hover .frame-meta,
-  .frame:focus-visible .frame-meta{
-    transform: translateY(0);
-  }
+    .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.92) contrast(1.03);
+      transition: transform 0.6s cubic-bezier(.2, .7, .2, 1), filter 0.4s ease;
+    }
 
-  .frame:focus-visible{
-    outline: 2px solid var(--amber);
-    outline-offset: -2px;
-  }
+    .frame-number {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--amber);
+      background: rgba(12, 11, 8, 0.65);
+      padding: 2px 6px;
+      z-index: 2;
+    }
 
-  footer{
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 32px 60px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11.5px;
-    color: var(--bone-dim);
-    display:flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+    .frame-meta {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 10px 12px 12px;
+      background: linear-gradient(to top, rgba(12, 11, 8, 0.92), rgba(12, 11, 8, 0));
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(.2, .7, .2, 1);
+      z-index: 2;
+    }
 
-  /* Lightbox / light table */
-  .lighttable{
-    position: fixed;
-    inset: 0;
-    background: rgba(8,7,5,0.94);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding: 5vw;
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  .lighttable.open{ opacity:1; pointer-events:auto; }
+    .frame-meta .title {
+      font-family: 'Fraunces', serif;
+      font-size: 14.5px;
+      font-style: italic;
+      color: var(--bone);
+      margin: 0 0 3px;
+    }
 
-  .lighttable-inner{
-    max-width: 900px;
-    width:100%;
-    background: var(--bg-raised);
-    border: 1px solid var(--amber);
-    box-shadow: 0 0 60px rgba(201,138,62,0.15), 0 20px 60px rgba(0,0,0,0.6);
-    padding: 18px;
-  }
+    .frame-meta .specs {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      color: var(--sage);
+      margin: 0;
+    }
 
-  .lighttable img{
-    width:100%;
-    max-height: 62vh;
-    object-fit: contain;
-    display:block;
-    background:#000;
-  }
+    .frame:hover img,
+    .frame:focus-visible img {
+      transform: scale(1.06);
+      filter: saturate(1) contrast(1.05);
+    }
 
-  .lighttable-caption{
-    display:flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 20px;
-    padding-top: 16px;
-    flex-wrap: wrap;
-  }
-  .lighttable-caption .title{
-    font-family:'Fraunces', serif;
-    font-style: italic;
-    font-size: 19px;
-    margin:0;
-  }
-  .lighttable-caption .specs{
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11.5px;
-    color: var(--sage);
-    margin: 4px 0 0;
-  }
+    .frame:hover .frame-meta,
+    .frame:focus-visible .frame-meta {
+      transform: translateY(0);
+    }
 
-  .lighttable-close{
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--bone-dim);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    cursor: pointer;
-    flex: none;
-  }
-  .lighttable-close:hover{ border-color: var(--amber); color: var(--amber); }
+    .frame:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: -2px;
+    }
 
-  .lighttable-nav{
-    position:absolute;
-    top:50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--bone-dim);
-    font-family: 'Oswald', sans-serif;
-    font-size: 34px;
-    cursor: pointer;
-    padding: 10px 16px;
-    line-height:1;
-  }
-  .lighttable-nav:hover{ color: var(--amber); }
-  .lighttable-nav.prev{ left: 0; }
-  .lighttable-nav.next{ right: 0; }
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px 60px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      color: var(--bone-dim);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    .frame img, .frame-meta, .lighttable{ transition: none; }
-  }
-</style>
+    /* Lightbox / light table */
+    .lighttable {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 7, 5, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5vw;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lighttable.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lighttable-inner {
+      max-width: 900px;
+      width: 100%;
+      background: var(--bg-raised);
+      border: 1px solid var(--amber);
+      box-shadow: 0 0 60px rgba(201, 138, 62, 0.15), 0 20px 60px rgba(0, 0, 0, 0.6);
+      padding: 18px;
+    }
+
+    .lighttable img {
+      width: 100%;
+      max-height: 62vh;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+
+    .lighttable-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      padding-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .lighttable-caption .title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 19px;
+      margin: 0;
+    }
+
+    .lighttable-caption .specs {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      color: var(--sage);
+      margin: 4px 0 0;
+    }
+
+    .lighttable-close {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--bone-dim);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      cursor: pointer;
+      flex: none;
+    }
+
+    .lighttable-close:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    .lighttable-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--bone-dim);
+      font-family: 'Oswald', sans-serif;
+      font-size: 34px;
+      cursor: pointer;
+      padding: 10px 16px;
+      line-height: 1;
+    }
+
+    .lighttable-nav:hover {
+      color: var(--amber);
+    }
+
+    .lighttable-nav.prev {
+      left: 0;
+    }
+
+    .lighttable-nav.next {
+      right: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .frame img,
+      .frame-meta,
+      .lighttable {
+        transition: none;
+      }
+    }
+
+    .button-42 {
+      background-color: initial;
+      background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+      border-radius: 6px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+      height: 40px;
+      line-height: 40px;
+      outline: 0;
+      overflow: hidden;
+      padding: 0 20px;
+      pointer-events: auto;
+      position: relative;
+      text-align: center;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      vertical-align: top;
+      white-space: nowrap;
+      width: 20%;
+      z-index: 9;
+      border: 0;
+      transition: box-shadow .2s;
+    }
+
+    .button-42:hover {
+      box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="sprocket-strip" aria-hidden="true">
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
-
-<header class="masthead">
-  <p class="eyebrow">BASI Images Archive</p>
-  <h1>BASI <span>— Contact Sheet</span></h1>
-  <!-- <div class="stamp-row">
-    <span><strong>Stock</strong> Portra 400</span>
-    <span><strong>Format</strong> 35mm</span>
-    <span><strong>Exposed</strong> Aug 2026</span>
-    <span><strong>Frames</strong> 12</span>
-    <span><strong>Processed</strong> C-41, home lab</span>
-  </div> -->
-</header>
-
-<main class="sheet">
-  <div class="grid" id="grid"></div>
-</main>
-
-<footer>
-  <span>© For viewing only, images property of the Barbados Astronomical Society Inc.</span>
-  <span>Click any frame to view on the light table</span>
-</footer>
-
-<div class="sprocket-strip" aria-hidden="true">
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
-
-<div class="lighttable" id="lighttable" role="dialog" aria-modal="true" aria-label="Enlarged photo view">
-  <button class="lighttable-nav prev" id="prevBtn" aria-label="Previous frame">‹</button>
-  <div class="lighttable-inner">
-    <img id="lighttableImg" src="" alt="">
-    <div class="lighttable-caption">
-      <div>
-        <p class="title" id="lighttableTitle"></p>
-        <p class="specs" id="lighttableSpecs"></p>
-      </div>
-      <button class="lighttable-close" id="closeBtn">Close ✕</button>
-    </div>
+  <div class="sprocket-strip" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
-  <button class="lighttable-nav next" id="nextBtn" aria-label="Next frame">›</button>
-</div>
 
-<script>
-  const images = [
-    {id: 1, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786300958/Astrophotography/vyz8q0rp73g2fyalldqj.jpg', name: 'Rosetta Nebula - David Marshall'},
-    {id: 2, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786300958/Astrophotography/xyiyateqloxey6aef3n3.jpg', name: 'Lagoon Nebula - Angela Skeete'},
-    {id: 3, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302109/Astrophotography/supernova-in-m101-1024x683.jpg', name: 'Supernova in M101'},
-    {id: 4, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302097/Astrophotography/jupiter-600-stacked-1024x576.jpg', name: 'Jupiter and Gallilean moons'},
-    {id: 5, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302065/Astrophotography/harrybayley_bw.jpg', name: 'Harry Bayley Observatory'},
-    {id: 6, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302868/Astrophotography/Pluto.jpg', name: 'The lines near the center of this image point to a world roughly two-thirds the size of the Moon at a distance of 5 billion kilometers. This is Pluto. David Marshall'},
-    {id: 7, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786303047/Astrophotography/Pillars_of_creation_-_David_Marshall.jpg', name: 'Pillars of Creation - David Marshall'},
-    {id: 8, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786303251/Astrophotography/Cats_paw_-_Angela_Skeete.jpg', name: 'Cats Paw Nebula - Angela Skeete'},
-  ];
+  <header class="masthead">
+    <p class="eyebrow">BASI Images Archive</p>
+    <h1>BASI <span>— Contact Sheet</span></h1>
+    <div class="stamp-row">
+      <button class="button-42" role="button" onclick="window.location.href='https://hbo.bb/hbo';">Back To HBO</button>
+      <!-- <span><strong>Stock</strong> Portra 400</span>
+      <span><strong>Format</strong> 35mm</span>
+      <span><strong>Exposed</strong> Aug 2026</span>
+      <span><strong>Frames</strong> 12</span>
+      <span><strong>Processed</strong> C-41, home lab</span> -->
+    </div>
+  </header>
 
-  // const frames = [
-  //   { id: 1084, num: "01A", title: "Coastal switchback, first light", specs: "f/8 · 1/250 · overcast" },
-  //   { id: 1076, num: "02",  title: "Ridge line, late afternoon", specs: "f/11 · 1/125 · clear" },
-  //   { id: 431,  num: "03",  title: "Terminal, platform 3", specs: "f/2.8 · 1/60 · tungsten" },
-  //   { id: 1015, num: "04",  title: "Harbor wall, low tide", specs: "f/16 · 1/60 · bright sun" },
-  //   { id: 1039, num: "05",  title: "Switchback trail, pines", specs: "f/8 · 1/250 · hazy" },
-  //   { id: 160,  num: "06",  title: "Corner store, closing time", specs: "f/2 · 1/30 · sodium light" },
-  //   { id: 110,  num: "07",  title: "Stairwell, old quarter", specs: "f/5.6 · 1/125 · window light" },
-  //   { id: 219,  num: "08",  title: "Market stalls, midday", specs: "f/11 · 1/500 · overhead sun" },
-  //   { id: 129,  num: "09",  title: "River bend, dusk", specs: "f/4 · 1/60 · blue hour" },
-  //   { id: 1043, num: "10",  title: "Fence line, wide field", specs: "f/8 · 1/250 · flat light" },
-  //   { id: 306,  num: "11",  title: "Doorway, side street", specs: "f/2.8 · 1/60 · shade" },
-  //   { id: 1050, num: "12A", title: "Overlook, roll's end", specs: "f/11 · 1/125 · golden hour" }
-  // ];
+  <main class="sheet">
+    <div class="grid" id="grid"></div>
+  </main>
 
-  const grid = document.getElementById("grid");
+  <footer>
+    <span>© For viewing only, images property of the Barbados Astronomical Society Inc.</span>
+    <span>Click any frame to view on the light table</span>
+  </footer>
 
-  images.forEach((f, i) => {
-    const btn = document.createElement("button");
-    btn.className = "frame";
-    btn.setAttribute("data-index", i);
+  <div class="sprocket-strip" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
 
-    btn.innerHTML = `
+  <div class="lighttable" id="lighttable" role="dialog" aria-modal="true" aria-label="Enlarged photo view">
+    <button class="lighttable-nav prev" id="prevBtn" aria-label="Previous frame">‹</button>
+    <div class="lighttable-inner">
+      <img id="lighttableImg" src="" alt="">
+      <div class="lighttable-caption">
+        <div>
+          <p class="title" id="lighttableTitle"></p>
+          <p class="specs" id="lighttableSpecs"></p>
+        </div>
+        <button class="lighttable-close" id="closeBtn">Close ✕</button>
+      </div>
+    </div>
+    <button class="lighttable-nav next" id="nextBtn" aria-label="Next frame">›</button>
+  </div>
+
+  <script>
+    const images = [
+      { id: 1, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786300958/Astrophotography/vyz8q0rp73g2fyalldqj.jpg', name: 'Rosetta Nebula - David Marshall' },
+      { id: 2, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786300958/Astrophotography/xyiyateqloxey6aef3n3.jpg', name: 'Lagoon Nebula - Angela Skeete' },
+      { id: 3, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302109/Astrophotography/supernova-in-m101-1024x683.jpg', name: 'Supernova in M101' },
+      { id: 4, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302097/Astrophotography/jupiter-600-stacked-1024x576.jpg', name: 'Jupiter and Gallilean moons' },
+      { id: 5, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302065/Astrophotography/harrybayley_bw.jpg', name: 'Harry Bayley Observatory' },
+      { id: 6, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786302868/Astrophotography/Pluto.jpg', name: 'The lines near the center of this image point to a world roughly two-thirds the size of the Moon at a distance of 5 billion kilometers. This is Pluto. David Marshall' },
+      { id: 7, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786303047/Astrophotography/Pillars_of_creation_-_David_Marshall.jpg', name: 'Pillars of Creation - David Marshall' },
+      { id: 8, url: 'https://res.cloudinary.com/cyber-sea-inc/image/upload/v1786303251/Astrophotography/Cats_paw_-_Angela_Skeete.jpg', name: 'Cats Paw Nebula - Angela Skeete' },
+    ];
+
+    // const frames = [
+    //   { id: 1084, num: "01A", title: "Coastal switchback, first light", specs: "f/8 · 1/250 · overcast" },
+    //   { id: 1076, num: "02",  title: "Ridge line, late afternoon", specs: "f/11 · 1/125 · clear" },
+    //   { id: 431,  num: "03",  title: "Terminal, platform 3", specs: "f/2.8 · 1/60 · tungsten" },
+    //   { id: 1015, num: "04",  title: "Harbor wall, low tide", specs: "f/16 · 1/60 · bright sun" },
+    //   { id: 1039, num: "05",  title: "Switchback trail, pines", specs: "f/8 · 1/250 · hazy" },
+    //   { id: 160,  num: "06",  title: "Corner store, closing time", specs: "f/2 · 1/30 · sodium light" },
+    //   { id: 110,  num: "07",  title: "Stairwell, old quarter", specs: "f/5.6 · 1/125 · window light" },
+    //   { id: 219,  num: "08",  title: "Market stalls, midday", specs: "f/11 · 1/500 · overhead sun" },
+    //   { id: 129,  num: "09",  title: "River bend, dusk", specs: "f/4 · 1/60 · blue hour" },
+    //   { id: 1043, num: "10",  title: "Fence line, wide field", specs: "f/8 · 1/250 · flat light" },
+    //   { id: 306,  num: "11",  title: "Doorway, side street", specs: "f/2.8 · 1/60 · shade" },
+    //   { id: 1050, num: "12A", title: "Overlook, roll's end", specs: "f/11 · 1/125 · golden hour" }
+    // ];
+
+    const grid = document.getElementById("grid");
+
+    images.forEach((f, i) => {
+      const btn = document.createElement("button");
+      btn.className = "frame";
+      btn.setAttribute("data-index", i);
+
+      btn.innerHTML = `
       <span class="frame-number">${f.id}</span>
       <img src="${f.url}" alt="${f.name}" loading="lazy">
       <span class="frame-meta">
@@ -392,69 +474,72 @@
       </span>
     `;
 
-    // btn.innerHTML = `
-    //   <span class="frame-number">${f.num}</span>
-    //   <img src="https://picsum.photos/id/${f.id}/700/467" alt="${f.title}" loading="lazy">
-    //   <span class="frame-meta">
-    //     <p class="title">${f.title}</p>
-    //     <p class="specs">${f.specs}</p>
-    //   </span>
-    // `;
-    
-    btn.addEventListener("click", () => openLighttable(i));
-    grid.appendChild(btn);
-  });
+      // btn.innerHTML = `
+      //   <span class="frame-number">${f.num}</span>
+      //   <img src="https://picsum.photos/id/${f.id}/700/467" alt="${f.title}" loading="lazy">
+      //   <span class="frame-meta">
+      //     <p class="title">${f.title}</p>
+      //     <p class="specs">${f.specs}</p>
+      //   </span>
+      // `;
 
-  const lighttable = document.getElementById("lighttable");
-  const ltImg = document.getElementById("lighttableImg");
-  const ltTitle = document.getElementById("lighttableTitle");
-  const ltSpecs = document.getElementById("lighttableSpecs");
-  const closeBtn = document.getElementById("closeBtn");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  let current = 0;
-  let lastFocused = null;
+      btn.addEventListener("click", () => openLighttable(i));
+      grid.appendChild(btn);
+    });
 
-  function openLighttable(i){
-    current = i;
-    // const f = frames[i];
-    const f = images[i];
-    // ltImg.src = `https://picsum.photos/id/${f.id}/1400/933`;
-    ltImg.src = `${f.url}`;
-    // ltImg.alt = f.title;
-    ltImg.alt = f.name;
-    ltTitle.textContent = `Frame ${f.id} — ${f.name}`;
-    ltSpecs.textContent = f.specs;
-    lighttable.classList.add("open");
-    lastFocused = document.activeElement;
-    closeBtn.focus();
-    document.addEventListener("keydown", onKey);
-  }
+    const lighttable = document.getElementById("lighttable");
+    const ltImg = document.getElementById("lighttableImg");
+    const ltTitle = document.getElementById("lighttableTitle");
+    const ltSpecs = document.getElementById("lighttableSpecs");
+    const closeBtn = document.getElementById("closeBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let current = 0;
+    let lastFocused = null;
 
-  function closeLighttable(){
-    lighttable.classList.remove("open");
-    document.removeEventListener("keydown", onKey);
-    if(lastFocused) lastFocused.focus();
-  }
+    function openLighttable(i) {
+      current = i;
+      // const f = frames[i];
+      const f = images[i];
+      console.log('image', f);
+      // ltImg.src = `https://picsum.photos/id/${f.id}/1400/933`;
+      ltImg.src = f.url;
+      // ltImg.alt = f.title;
+      ltImg.alt = f.name;
+      ltTitle.textContent = `Frame ${f.id} — ${f.name}`;
+      ltSpecs.textContent = f.specs;
+      lighttable.classList.add("open");
+      lastFocused = document.activeElement;
+      closeBtn.focus();
+      document.addEventListener("keydown", onKey);
+    }
 
-  function step(dir){
-    current = (current + dir + frames.length) % frames.length;
-    openLighttable(current);
-  }
+    function closeLighttable() {
+      lighttable.classList.remove("open");
+      document.removeEventListener("keydown", onKey);
+      if (lastFocused) lastFocused.focus();
+    }
 
-  function onKey(e){
-    if(e.key === "Escape") closeLighttable();
-    if(e.key === "ArrowRight") step(1);
-    if(e.key === "ArrowLeft") step(-1);
-  }
+    function step(dir) {
+      current = (current + dir + frames.length) % frames.length;
+      // console.log('current', current);
+      openLighttable(current);
+    }
 
-  closeBtn.addEventListener("click", closeLighttable);
-  nextBtn.addEventListener("click", () => step(1));
-  prevBtn.addEventListener("click", () => step(-1));
-  lighttable.addEventListener("click", (e) => {
-    if(e.target === lighttable) closeLighttable();
-  });
-</script>
+    function onKey(e) {
+      if (e.key === "Escape") closeLighttable();
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
+    }
+
+    closeBtn.addEventListener("click", closeLighttable);
+    nextBtn.addEventListener("click", () => step(1));
+    prevBtn.addEventListener("click", () => step(-1));
+    lighttable.addEventListener("click", (e) => {
+      if (e.target === lighttable) closeLighttable();
+    });
+  </script>
 
 </body>
+
 </html>
