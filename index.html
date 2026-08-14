@@ -418,7 +418,8 @@
   </div>
 
   <div class="lighttable" id="lighttable" role="dialog" aria-modal="true" aria-label="Enlarged photo view">
-    <!-- <button class="lighttable-nav prev" id="prevBtn" aria-label="Previous frame">‹</button> -->
+    <button class="lighttable-nav prev" id="prevBtn" aria-label="Previous frame">‹</button>
+
     <div class="lighttable-inner">
       <img id="lighttableImg" src="" alt="">
       <div class="lighttable-caption">
@@ -429,7 +430,8 @@
         <button class="lighttable-close" id="closeBtn">Close ✕</button>
       </div>
     </div>
-    <!-- <button class="lighttable-nav next" id="nextBtn" aria-label="Next frame">›</button> -->
+
+    <button class="lighttable-nav next" id="nextBtn" aria-label="Next frame">›</button>
   </div>
 
   <script>
@@ -534,8 +536,8 @@
     }
 
     function step(dir) {
-      current = (current + dir + frames.length) % frames.length;
-      // console.log('current', current);
+      current = (current + dir + images.length) % images.length;
+      console.log('current', current);
       openLighttable(current);
     }
 
